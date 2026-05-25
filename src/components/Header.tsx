@@ -1,12 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { navLinks, site } from "@/lib/content";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const mobileMenuRef = useRef<HTMLElement | null>(null);
+  const wasMenuOpen = useRef(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -14,6 +17,14 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    // Restore focus to the trigger when the menu closes.
+    if (wasMenuOpen.current && !menuOpen) {
+      menuButtonRef.current?.focus();
+    }
+    wasMenuOpen.current = menuOpen;
+  }, [menuOpen]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -29,6 +40,50 @@ export function Header() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const menu = mobileMenuRef.current;
+    if (!menu) return;
+
+    const getFocusable = () =>
+      Array.from(
+        menu.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((el) => !el.hasAttribute("disabled"));
+
+    const focusables = getFocusable();
+    const first = focusables[0];
+
+    // Move focus into the menu when it opens.
+    first?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const current = document.activeElement as HTMLElement | null;
+      const updated = getFocusable();
+      const updatedFirst = updated[0];
+      const updatedLast = updated[updated.length - 1];
+      if (!updatedFirst || !updatedLast) return;
+
+      if (e.shiftKey) {
+        if (!current || current === updatedFirst) {
+          e.preventDefault();
+          updatedLast.focus();
+        }
+        return;
+      }
+
+      if (current === updatedLast) {
+        e.preventDefault();
+        updatedFirst.focus();
+      }
+    };
+
+    menu.addEventListener("keydown", onKeyDown);
+    return () => menu.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
 
   return (
     <>
@@ -68,6 +123,7 @@ export function Header() {
             aria-controls="mobile-menu"
             aria-label={menuOpen ? "Stäng meny" : "Öppna meny"}
             onClick={() => setMenuOpen((o) => !o)}
+            ref={menuButtonRef}
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -88,6 +144,7 @@ export function Header() {
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
         aria-hidden={!menuOpen}
+        ref={mobileMenuRef}
       >
         {navLinks.map((link) => (
           <a

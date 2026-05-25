@@ -63,4 +63,21 @@ body {
   .nav-cta {
     @apply rounded-[2px] border-[1.5px] border-accent px-[1.1rem] py-[0.45rem] text-[0.85rem] font-medium text-accent transition-colors hover:bg-accent hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
   }
+
+  /* Intentional “draft placeholders” (images/text added later) */
+  .placeholder-frame {
+    @apply flex flex-col items-center justify-center gap-2 rounded-[2px] border border-accent/10 bg-accent-light shadow-sm;
+  }
+
+  .placeholder-frame-dark {
+    @apply relative overflow-hidden rounded-[2px] border border-white/[0.08] bg-white/[0.07] transition-colors hover:border-white/15;
+  }
+
+  .placeholder-caption {
+    @apply text-[0.8rem] text-accent opacity-60;
+  }
+
+  .placeholder-caption-dark {
+    @apply text-[0.8rem] text-white/55;
+  }
 }

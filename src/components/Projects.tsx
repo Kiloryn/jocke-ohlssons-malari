@@ -1,24 +1,41 @@
-import { projects } from "@/lib/content";
+import Image from "next/image";
+import { projects, type ProjectItem } from "@/lib/content";
 
-type Placeholder = (typeof projects.placeholders)[number];
-
-function ProjectCard({ item }: { item: Placeholder }) {
+function ProjectCard({ item }: { item: ProjectItem }) {
   return (
     <article
-      className={`group relative min-h-[140px] overflow-hidden rounded-[2px] border border-white/[0.08] bg-white/[0.07] transition-colors hover:border-white/15 md:min-h-0 ${item.gridSpan.md} ${item.gridSpan.sm ?? ""}`}
+      className={`group placeholder-frame-dark min-h-[140px] md:min-h-0 ${item.gridSpan.md} ${item.gridSpan.sm ?? ""}`}
     >
-      {/* Ersätts med next/image: className="absolute inset-0 h-full w-full object-cover" */}
-      <div
-        className="absolute inset-0 bg-white/[0.04] transition-colors duration-500 group-hover:bg-white/[0.08]"
-        aria-hidden
-      />
+      {item.imageSrc ? (
+        <>
+          <Image
+            src={item.imageSrc}
+            alt={item.alt ?? item.label}
+            fill
+            sizes="(min-width: 768px) 40vw, 100vw"
+            className="absolute inset-0 h-full w-full object-cover"
+            priority={false}
+          />
+          <div
+            className="absolute inset-0 bg-gradient-to-t from-ink/65 via-ink/15 to-transparent"
+            aria-hidden
+          />
+        </>
+      ) : (
+        <div
+          className="absolute inset-0 bg-white/[0.04] transition-colors duration-500 group-hover:bg-white/[0.08]"
+          aria-hidden
+        />
+      )}
 
       <div className="relative flex h-full min-h-[140px] items-end p-4 transition-transform duration-500 ease-out group-hover:scale-[1.02] md:min-h-0">
         <span className="text-sm font-medium text-white/85">
           {item.label}
-          <span className="mt-0.5 block text-[0.8rem] font-normal text-white/40">
-            Bild kommer
-          </span>
+          {!item.imageSrc && (
+            <span className="placeholder-caption-dark mt-0.5 block font-normal">
+              Bild kommer
+            </span>
+          )}
         </span>
       </div>
     </article>
@@ -34,7 +51,7 @@ export function Projects() {
         <p className="mb-12 mt-4 text-[0.9rem] text-white/50">{projects.lead}</p>
 
         <div className="grid auto-rows-[60px] grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-12">
-          {projects.placeholders.map((item, i) => (
+          {(projects.placeholders as ProjectItem[]).map((item, i) => (
             <ProjectCard key={i} item={item} />
           ))}
         </div>

@@ -31,12 +31,12 @@ export function About() {
           </div>
 
           <div
-            className="flex h-[280px] flex-col items-center justify-center gap-2 rounded-[2px] border border-accent/10 bg-accent-light shadow-sm md:h-[440px]"
+            className="placeholder-frame h-[280px] md:h-[440px]"
             role="img"
             aria-label={about.photoPlaceholder}
           >
             <User className="h-9 w-9 stroke-accent opacity-50" strokeWidth={1.2} />
-            <span className="text-[0.8rem] text-accent opacity-60">
+            <span className="placeholder-caption">
               {about.photoPlaceholder}
             </span>
           </div>

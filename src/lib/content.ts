@@ -1,4 +1,20 @@
-export const site = {
+export type SiteInfo = {
+  name: string;
+  tagline: string;
+  phone: string;
+  phoneHref: string;
+  location: string;
+  region: string;
+  serviceArea: string;
+  instagram: string;
+  instagramHandle: string;
+  // Future fields (optional until you get the final customer info):
+  email?: string;
+  address?: string;
+  orgNumber?: string;
+};
+
+export const site: SiteInfo = {
   name: "Jocke Ohlssons Måleri",
   tagline: "Måleriföretag · Töreboda · Skaraborg",
   phone: "073–593 67 98",
@@ -8,7 +24,7 @@ export const site = {
   serviceArea: "Hela Sverige",
   instagram: "https://www.instagram.com/jockeohlssonsmaleri/",
   instagramHandle: "@jockeohlssonsmaleri",
-} as const;
+};
 
 export const navLinks = [
   { href: "#tjanster", label: "Tjänster" },
@@ -77,14 +93,43 @@ export const projects = {
   title: "Våra projekt",
   lead: "Bilderna nedan ersätts med Jockes egna projektfoton.",
   placeholders: [
-    { label: "Inomhus", gridSpan: { md: "md:col-span-7 md:row-span-6", sm: "sm:col-span-2" } },
-    { label: "Utomhus", gridSpan: { md: "md:col-span-5 md:row-span-4", sm: "" } },
-    { label: "Fasad", gridSpan: { md: "md:col-span-2 md:row-span-4", sm: "" } },
-    { label: "Tapet", gridSpan: { md: "md:col-span-2 md:row-span-4", sm: "" } },
-    { label: "Inomhus", gridSpan: { md: "md:col-span-2 md:row-span-4", sm: "" } },
-    { label: "Utomhus", gridSpan: { md: "md:col-span-8 md:row-span-4", sm: "sm:col-span-2" } },
-  ],
+    {
+      label: "Inomhus",
+      gridSpan: { md: "md:col-span-7 md:row-span-6", sm: "sm:col-span-2" },
+      // imageSrc: "/projects/inomhus-1.jpg",
+      // alt: "Inomhusmålning",
+    },
+    {
+      label: "Utomhus",
+      gridSpan: { md: "md:col-span-5 md:row-span-4", sm: "" },
+    },
+    {
+      label: "Fasad",
+      gridSpan: { md: "md:col-span-2 md:row-span-4", sm: "" },
+    },
+    {
+      label: "Tapet",
+      gridSpan: { md: "md:col-span-2 md:row-span-4", sm: "" },
+    },
+    {
+      label: "Inomhus",
+      gridSpan: { md: "md:col-span-2 md:row-span-4", sm: "" },
+    },
+    {
+      label: "Utomhus",
+      gridSpan: { md: "md:col-span-8 md:row-span-4", sm: "sm:col-span-2" },
+    },
+  ] satisfies ProjectItem[],
 } as const;
+
+export type ProjectItem = {
+  label: string;
+  gridSpan: { md: string; sm?: string };
+  imageSrc?: string;
+  alt?: string;
+  location?: string;
+  year?: string;
+};
 
 export const process = {
   label: "Så jobbar vi",

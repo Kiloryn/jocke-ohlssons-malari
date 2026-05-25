@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local tools / internal skill folders (not part of the website source):
+    ".minimax/**",
+    ".continue/**",
   ]),
 ]);
 

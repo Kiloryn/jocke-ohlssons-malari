@@ -4,16 +4,79 @@ import { useState } from "react";
 import { InstagramIcon } from "@/components/InstagramIcon";
 import { contact, site } from "@/lib/content";
 
-export function Contact() {
-  const [notice, setNotice] = useState(false);
+type Status = "idle" | "sending" | "success" | "error" | "notConfigured";
 
-  function handleSubmit(e: React.FormEvent) {
+export function Contact() {
+  const [status, setStatus] = useState<Status>("idle");
+  const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<{
+    name?: string;
+    contact?: string;
+    msg?: string;
+  }>({});
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setNotice(true);
+
+    setError(null);
+    setFieldErrors({});
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    const name = String(data.get("name") ?? "").trim();
+    const contactField = String(data.get("contact") ?? "").trim();
+    const msg = String(data.get("msg") ?? "").trim();
+    const companyWebsite = String(data.get("companyWebsite") ?? "").trim();
+
+    const nextErrors: typeof fieldErrors = {};
+    if (!name) nextErrors.name = "Fyll i ditt namn.";
+    if (!contactField) nextErrors.contact = "Fyll i telefon eller e-post.";
+    if (!msg) nextErrors.msg = "Skriv en kort beskrivning.";
+
+    if (Object.keys(nextErrors).length) {
+      setFieldErrors(nextErrors);
+      setStatus("error");
+      return;
+    }
+
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          contact: contactField,
+          msg,
+          companyWebsite,
+        }),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+        return;
+      }
+
+      if (res.status === 501) {
+        setStatus("notConfigured");
+        return;
+      }
+
+      setStatus("error");
+      setError("Något gick fel. Ring oss så hjälper vi dig direkt.");
+    } catch {
+      setStatus("error");
+      setError("Något gick fel. Ring oss så hjälper vi dig direkt.");
+    }
   }
 
   return (
-    <section id="kontakt" className="bg-white py-[5.5rem]">
+    <section
+      id="kontakt"
+      className="border-t border-[var(--color-border)] bg-cream py-[5.5rem]"
+    >
       <div className="container-page">
         <div className="grid items-start gap-10 md:grid-cols-2 md:gap-20">
           <div>
@@ -60,6 +123,18 @@ export function Contact() {
 
           <div>
             <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+              {/* Honeypot field (anti-spam). Must remain empty. */}
+              <div className="hidden" aria-hidden>
+                <label htmlFor="companyWebsite">Webbplats</label>
+                <input
+                  id="companyWebsite"
+                  name="companyWebsite"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div className="flex flex-col gap-1.5">
                 <label
                   htmlFor="name"
@@ -72,9 +147,15 @@ export function Contact() {
                   id="name"
                   name="name"
                   autoComplete="name"
+                  required
                   placeholder="Ditt namn"
-                  className="rounded-[2px] border border-[var(--color-border)] bg-cream px-4 py-3 text-[0.9rem] text-ink outline-none transition-colors focus:border-accent"
+                  aria-invalid={Boolean(fieldErrors.name)}
+                  className="rounded-[2px] border border-[var(--color-border)] bg-white px-4 py-3 text-[0.9rem] text-ink outline-none transition-colors focus:border-accent aria-[invalid=true]:border-red-400"
+                  disabled={status === "sending"}
                 />
+                {fieldErrors.name && (
+                  <p className="text-[0.82rem] text-red-600">{fieldErrors.name}</p>
+                )}
               </div>
               <div className="flex flex-col gap-1.5">
                 <label
@@ -88,9 +169,17 @@ export function Contact() {
                   id="contact-field"
                   name="contact"
                   autoComplete="tel"
+                  required
                   placeholder="Hur vi når dig"
-                  className="rounded-[2px] border border-[var(--color-border)] bg-cream px-4 py-3 text-[0.9rem] text-ink outline-none transition-colors focus:border-accent"
+                  aria-invalid={Boolean(fieldErrors.contact)}
+                  className="rounded-[2px] border border-[var(--color-border)] bg-white px-4 py-3 text-[0.9rem] text-ink outline-none transition-colors focus:border-accent aria-[invalid=true]:border-red-400"
+                  disabled={status === "sending"}
                 />
+                {fieldErrors.contact && (
+                  <p className="text-[0.82rem] text-red-600">
+                    {fieldErrors.contact}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col gap-1.5">
                 <label
@@ -102,19 +191,55 @@ export function Contact() {
                 <textarea
                   id="msg"
                   name="msg"
+                  required
                   placeholder="Beskriv ditt projekt kort — typ av jobb, ungefär var och när…"
-                  className="min-h-[120px] resize-y rounded-[2px] border border-[var(--color-border)] bg-cream px-4 py-3 text-[0.9rem] text-ink outline-none transition-colors focus:border-accent"
+                  aria-invalid={Boolean(fieldErrors.msg)}
+                  className="min-h-[120px] resize-y rounded-[2px] border border-[var(--color-border)] bg-white px-4 py-3 text-[0.9rem] text-ink outline-none transition-colors focus:border-accent aria-[invalid=true]:border-red-400"
+                  disabled={status === "sending"}
                 />
+                {fieldErrors.msg && (
+                  <p className="text-[0.82rem] text-red-600">{fieldErrors.msg}</p>
+                )}
               </div>
-              <button type="submit" className="btn-primary self-start">
-                Skicka förfrågan
+              <button
+                type="submit"
+                className="btn-primary self-start disabled:cursor-not-allowed disabled:opacity-70"
+                disabled={status === "sending"}
+              >
+                {status === "sending" ? "Skickar…" : "Skicka förfrågan"}
               </button>
-              {notice && (
+
+              {status === "success" && (
+                <p
+                  role="status"
+                  className="rounded-[2px] border border-accent/20 bg-accent-light px-4 py-3 text-[0.85rem] text-accent-dark"
+                >
+                  Tack! Vi återkommer inom ett arbetsdygn. Om det är bråttom:{" "}
+                  <a href={site.phoneHref} className="font-medium underline">
+                    {site.phone}
+                  </a>
+                  .
+                </p>
+              )}
+
+              {status === "notConfigured" && (
                 <p
                   role="status"
                   className="rounded-[2px] border border-accent/20 bg-accent-light px-4 py-3 text-[0.85rem] text-accent-dark"
                 >
                   {contact.formNotice}{" "}
+                  <a href={site.phoneHref} className="font-medium underline">
+                    {site.phone}
+                  </a>
+                </p>
+              )}
+
+              {status === "error" && error && (
+                <p
+                  role="status"
+                  className="rounded-[2px] border border-red-200 bg-red-50 px-4 py-3 text-[0.85rem] text-red-700"
+                >
+                  {error}{" "}
                   <a href={site.phoneHref} className="font-medium underline">
                     {site.phone}
                   </a>

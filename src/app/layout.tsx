@@ -16,13 +16,32 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  // Update this to your final production domain when deploying.
+  metadataBase: new URL("https://example.com"),
   title: `${site.name} – Måleri i Skaraborg & hela Sverige`,
   description: `${site.name} i Töreboda. Inomhus- och utomhusmålning, fasadrenovering och tapetsering. Bas i Skaraborg — uppdrag i hela Sverige.`,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: site.name,
     description: `Måleri med bas i ${site.region}. Uppdrag i hela Sverige.`,
     locale: "sv_SE",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: site.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.name,
+    description: `Måleri med bas i ${site.region}. Uppdrag i hela Sverige.`,
+    images: ["/opengraph-image"],
   },
 };
 
