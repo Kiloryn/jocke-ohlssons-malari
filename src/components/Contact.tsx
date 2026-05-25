@@ -71,6 +71,7 @@ export function Contact() {
                   type="text"
                   id="name"
                   name="name"
+                  autoComplete="name"
                   placeholder="Ditt namn"
                   className="rounded-[2px] border border-[var(--color-border)] bg-cream px-4 py-3 text-[0.9rem] text-ink outline-none transition-colors focus:border-accent"
                 />
@@ -86,6 +87,7 @@ export function Contact() {
                   type="text"
                   id="contact-field"
                   name="contact"
+                  autoComplete="tel"
                   placeholder="Hur vi når dig"
                   className="rounded-[2px] border border-[var(--color-border)] bg-cream px-4 py-3 text-[0.9rem] text-ink outline-none transition-colors focus:border-accent"
                 />

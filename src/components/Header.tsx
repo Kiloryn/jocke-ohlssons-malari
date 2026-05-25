@@ -33,10 +33,8 @@ export function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-[100] flex items-center justify-between border-b border-[var(--color-border)] px-6 py-4 backdrop-blur-md transition-shadow md:px-10 ${
-          scrolled
-            ? "bg-cream/98 shadow-sm"
-            : "bg-cream/94"
+        className={`sticky top-0 z-[100] flex items-center justify-between px-6 py-4 backdrop-blur-md transition-all duration-300 md:px-10 bg-cream/90 ${
+          scrolled ? "shadow-sm border-b border-[var(--color-border)]" : ""
         }`}
       >
         <a
@@ -46,14 +44,14 @@ export function Header() {
           {site.name}
         </a>
 
-        <ul className="hidden list-none gap-10 md:flex">
+        <ul className="hidden list-none gap-8 md:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-[0.85rem] tracking-[0.02em] text-ink-soft transition-colors hover:text-ink"
+                className="text-sm font-medium tracking-[0.02em] text-ink-soft transition-colors hover:text-ink"
               >
-                {link.label}
+{link.label}
               </a>
             </li>
           ))}
@@ -76,13 +74,13 @@ export function Header() {
         </div>
       </header>
 
-      {menuOpen && (
-        <div
-          className="fixed inset-0 z-[90] bg-ink/20 md:hidden"
-          aria-hidden
-          onClick={() => setMenuOpen(false)}
-        />
-      )}
+      <div
+        className={`fixed inset-0 z-[90] transition-opacity duration-300 backdrop-blur-sm bg-ink/30 md:hidden ${
+          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        aria-hidden
+        onClick={() => setMenuOpen(false)}
+      />
 
       <nav
         id="mobile-menu"
@@ -101,22 +99,24 @@ export function Header() {
             {link.label}
           </a>
         ))}
-        <a
-          href={site.phoneHref}
-          className="btn-primary mt-6 text-center"
-          onClick={() => setMenuOpen(false)}
-        >
-          {site.phone}
-        </a>
-        <a
-          href={site.instagram}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 text-center text-sm text-accent hover:underline"
-          onClick={() => setMenuOpen(false)}
-        >
-          {site.instagramHandle}
-        </a>
+        <div className="mt-auto">
+          <a
+            href={site.phoneHref}
+            className="btn-primary mt-6 text-center"
+            onClick={() => setMenuOpen(false)}
+          >
+            {site.phone}
+          </a>
+          <a
+            href={site.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 block text-center text-sm text-accent hover:underline"
+            onClick={() => setMenuOpen(false)}
+          >
+            {site.instagramHandle}
+          </a>
+        </div>
       </nav>
     </>
   );

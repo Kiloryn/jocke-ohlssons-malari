@@ -14,8 +14,8 @@ export function About() {
               {about.titleLine2}
             </h2>
             <div className="my-6 space-y-4 text-ink-soft leading-[1.75]">
-              {about.paragraphs.map((p) => (
-                <p key={p.slice(0, 24)}>{p}</p>
+              {about.paragraphs.map((p, i) => (
+                <p key={i}>{p}</p>
               ))}
             </div>
             <div className="flex flex-wrap gap-2.5">

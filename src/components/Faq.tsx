@@ -9,11 +9,13 @@ export function Faq() {
 
   return (
     <section className="bg-white py-[5.5rem]">
-      <div className="container-page">
-        <span className="label">{faq.label}</span>
-        <h2 className="section-title">{faq.title}</h2>
+      <div className="container-page md:grid md:grid-cols-12 md:gap-16 md:items-start">
+        <div className="md:col-span-4">
+          <span className="label">{faq.label}</span>
+          <h2 className="section-title">{faq.title}</h2>
+        </div>
 
-        <div className="mt-12 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
+        <div className="mt-12 md:mt-0 md:col-span-8 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
           {faq.items.map((item, i) => {
             const isOpen = openIndex === i;
             return (
@@ -31,11 +33,17 @@ export function Faq() {
                     }`}
                   />
                 </button>
-                {isOpen && (
-                  <p className="pb-5 text-[0.9rem] leading-[1.65] text-ink-soft">
-                    {item.answer}
-                  </p>
-                )}
+                                <div
+                  className={`grid transition-all duration-300 ${
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="pb-5 text-[0.9rem] leading-[1.65] text-ink-soft">
+                      {item.answer}
+                    </p>
+                  </div>
+                </div>
               </div>
             );
           })}
