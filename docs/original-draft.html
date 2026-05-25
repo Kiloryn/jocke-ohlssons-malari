@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jocke Ohlssons Måleri – Töreboda</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/400.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/400italic.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/600.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/dm-sans@5/index.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F8F6F1;
+      --white: #FFFFFF;
+      --ink: #1A1A18;
+      --ink-soft: #64645E;
+      --accent: #3C5A34;
+      --accent-dark: #283D22;
+      --accent-light: #E7EEE5;
+      --border: rgba(26,26,24,0.11);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAVIGATION ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248, 246, 241, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    nav ul a {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--ink); }
+
+    .nav-cta {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1.5px solid var(--accent);
+      padding: 0.45rem 1.1rem;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 91vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 6rem 2.5rem 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3.2rem, 7vw, 6rem);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.75rem;
+      max-width: 780px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      max-width: 440px;
+      margin-bottom: 2.5rem;
+      line-height: 1.65;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.875rem 2rem;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--accent-dark); }
+
+    .btn-ghost {
+      display: inline-block;
+      color: var(--ink-soft);
+      padding: 0.875rem 2rem;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .btn-ghost:hover { color: var(--ink); }
+
+    .hero-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 5rem 2.5rem 0;
+    }
+
+    /* ── SHARED ── */
+    section { padding: 5.5rem 2.5rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+    }
+
+    /* ── SERVICES ── */
+    #tjanster { background: var(--white); }
+
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3.5rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .services-header p {
+      color: var(--ink-soft);
+      max-width: 360px;
+      font-size: 0.95rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      border: 1px solid var(--border);
+    }
+
+    .service-item {
+      padding: 2.25rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .service-item:hover { background: var(--cream); }
+
+    .service-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .service-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    .service-item h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .service-item p { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.6; }
+
+    /* ── ABOUT ── */
+    #om { background: var(--cream); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-body { color: var(--ink-soft); margin: 1.5rem 0 2rem; line-height: 1.75; }
+    .about-body p + p { margin-top: 1rem; }
+
+    .badges { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+    .badge {
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .about-img {
+      background: var(--accent-light);
+      border-radius: 4px;
+      height: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      gap: 0.5rem;
+    }
+
+    .about-img svg { width: 36px; height: 36px; stroke: var(--accent); fill: none; stroke-width: 1.2; opacity: 0.5; }
+    .about-img span { font-size: 0.8rem; opacity: 0.6; }
+
+    /* ── PROJECTS ── */
+    #projekt { background: var(--ink); }
+
+    #projekt .label { color: #79B073; }
+    #projekt .section-title { color: white; }
+    #projekt .projects-lead { color: rgba(255,255,255,0.5); margin: 1rem 0 3rem; font-size: 0.9rem; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 60px;
+      gap: 8px;
+    }
+
+    .proj {
+      border-radius: 3px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+      transition: background 0.2s;
+    }
+
+    .proj:hover { background: rgba(255,255,255,0.1); }
+    .proj-1 { grid-column: 1 / 8; grid-row: 1 / 7; }
+    .proj-2 { grid-column: 8 / 13; grid-row: 1 / 5; }
+    .proj-3 { grid-column: 8 / 10; grid-row: 5 / 9; }
+    .proj-4 { grid-column: 10 / 13; grid-row: 5 / 9; }
+    .proj-5 { grid-column: 1 / 5; grid-row: 7 / 11; }
+    .proj-6 { grid-column: 5 / 13; grid-row: 7 / 11; }
+
+    /* ── CONTACT ── */
+    #kontakt { background: var(--white); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-lead { color: var(--ink-soft); margin: 1rem 0 2.5rem; font-size: 0.95rem; }
+
+    .contact-details { display: flex; flex-direction: column; }
+
+    .contact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-row:first-child { border-top: 1px solid var(--border); }
+
+    .contact-key {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .contact-val {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .contact-val:hover { color: var(--accent); }
+
+    .form { display: flex; flex-direction: column; gap: 1.1rem; padding-top: 0.5rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    label {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    input, textarea {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--ink);
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus { border-color: var(--accent); }
+
+    textarea { min-height: 120px; resize: vertical; }
+
+    .form-submit {
+      align-self: flex-start;
+      margin-top: 0.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--accent-dark);
+      color: rgba(255,255,255,0.45);
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    footer span { font-size: 0.8rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-img { height: 280px; }
+      .services-header { flex-direction: column; }
+      .projects-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 140px;
+      }
+      .proj-1 { grid-column: 1 / 3; grid-row: 1 / 2; }
+      .proj-2 { grid-column: 1 / 2; grid-row: 2 / 3; }
+      .proj-3 { grid-column: 2 / 3; grid-row: 2 / 3; }
+      .proj-4 { grid-column: 1 / 2; grid-row: 3 / 4; }
+      .proj-5 { grid-column: 2 / 3; grid-row: 3 / 4; }
+      .proj-6 { grid-column: 1 / 3; grid-row: 4 / 5; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">Jocke Ohlssons Måleri</a>
+  <ul>
+    <li><a href="#tjanster">Tjänster</a></li>
+    <li><a href="#om">Om oss</a></li>
+    <li><a href="#projekt">Projekt</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <a href="tel:0735936798" class="nav-cta">073–593 67 98</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-label">Måleriföretag · Töreboda · Skaraborg</p>
+  <h1>Målerier som<br><em>håller</em>, länge.</h1>
+  <p class="hero-sub">Vi utför alla typer av målningsuppdrag runt om i Skaraborg — med stor omsorg om hantverk, resultat och miljö.</p>
+  <div class="hero-actions">
+    <a href="#kontakt" class="btn-primary">Begär offert</a>
+    <a href="#projekt" class="btn-ghost">Se projekt →</a>
+  </div>
+</div>
+<hr class="hero-divider">
+
+<!-- TJÄNSTER -->
+<section id="tjanster">
+  <div class="container">
+    <div class="services-header">
+      <div>
+        <span class="label">Vad vi gör</span>
+        <h2 class="section-title">Alla typer av<br>målningsuppdrag</h2>
+      </div>
+      <p>Oavsett om det gäller ett rum eller en hel fastighet hjälper vi dig från start till mål.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Inomhusmålning</h3>
+        <p>Väggar, tak och snickerier — vi ger dina rum ett nytt och friskt uttryck.</p>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Utomhusmålning</h3>
+        <p>Panel, fönster och fasader som skyddas mot väder och bevarar husets karaktär.</p>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        </div>
+        <h3>Fasadrenovering</h3>
+        <p>Puts, ytbehandling och ommålning för fasader som håller i generationer.</p>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3>Tapetsering</h3>
+        <p>Klassisk tapet eller modernt mönster — vi hjälper dig välja och monterar med precision.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OM OSS -->
+<section id="om">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="label">Om oss</span>
+        <h2 class="section-title">Lokalt förankrade<br>i Skaraborg</h2>
+        <div class="about-body">
+          <p>Jocke Ohlssons Måleri är ett hantverksföretag från Töreboda med rötterna djupt i Västergötland. Vi tar uppdrag hos privatpersoner och företag i hela Skaraborg.</p>
+          <p>Kvalitet och noggrannhet genomsyrar varje projekt — från förberedelse till sista penseldrag. Vi värnar dessutom om klimatet och framför våra fordon som elbilar.</p>
+        </div>
+        <div class="badges">
+          <span class="badge">F-skatt</span>
+          <span class="badge">Försäkrade</span>
+          <span class="badge">⚡ Elbilar</span>
+          <span class="badge">Töreboda</span>
+          <span class="badge">Hela Skaraborg</span>
+        </div>
+      </div>
+      <div class="about-img">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Foto på Jocke — ersätts med riktigt foto</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJEKT -->
+<section id="projekt">
+  <div class="container">
+    <span class="label">Utfört arbete</span>
+    <h2 class="section-title">Våra projekt</h2>
+    <p class="projects-lead">Bilderna nedan ersätts med Jockes egna projektfoton.</p>
+    <div class="projects-grid">
+      <div class="proj proj-1">Foto 1 (stort)</div>
+      <div class="proj proj-2">Foto 2</div>
+      <div class="proj proj-3">Foto 3</div>
+      <div class="proj proj-4">Foto 4</div>
+      <div class="proj proj-5">Foto 5</div>
+      <div class="proj proj-6">Foto 6 (brett)</div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <span class="label">Kontakt</span>
+        <h2 class="section-title">Redo att<br>komma igång?</h2>
+        <p class="contact-lead">Hör av dig för en kostnadsfri offert. Vi återkommer inom ett arbets­dygn.</p>
+        <div class="contact-details">
+          <div class="contact-row">
+            <span class="contact-key">Telefon</span>
+            <a href="tel:0735936798" class="contact-val">073–593 67 98</a>
+          </div>
+          <div class="contact-row">
+            <span class="contact-key">Verksamhetsort</span>
+            <span class="contact-val">Töreboda</span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-key">Uppdragsområde</span>
+            <span class="contact-val">Hela Skaraborg</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <form class="form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="name">Namn</label>
+            <input type="text" id="name" placeholder="Ditt namn">
+          </div>
+          <div class="form-group">
+            <label for="contact">Telefon eller e-post</label>
+            <input type="text" id="contact" placeholder="Hur vi når dig">
+          </div>
+          <div class="form-group">
+            <label for="msg">Vad gäller det?</label>
+            <textarea id="msg" placeholder="Beskriv ditt projekt kort — typ av jobb, ungefär var och när…"></textarea>
+          </div>
+          <a href="#" class="btn-primary form-submit">Skicka förfrågan</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Jocke Ohlssons Måleri</span>
+  <span>Töreboda &middot; Skaraborg</span>
+  <span>073–593 67 98</span>
+</footer>
+
+</body>
+</html>
