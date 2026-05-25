@@ -29,9 +29,9 @@ export function Contact() {
               {contact.rows.map((row) => (
                 <div
                   key={row.key}
-                  className="flex items-center justify-between border-b border-[var(--color-border)] py-[1.1rem] first:border-t"
+                  className="flex items-center justify-between border-b border-[var(--color-border)] py-4 first:border-t"
                 >
-                  <span className="text-[0.72rem] uppercase tracking-[0.12em] text-ink-soft">
+                  <span className="text-[0.8rem] uppercase tracking-wider text-ink-soft">
                     {row.key}
                   </span>
                   {"href" in row && row.href ? (
@@ -59,7 +59,7 @@ export function Contact() {
           </div>
 
           <div>
-            <form className="flex flex-col gap-[1.1rem] pt-2" onSubmit={handleSubmit}>
+            <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
               <div className="flex flex-col gap-1.5">
                 <label
                   htmlFor="name"
@@ -104,13 +104,13 @@ export function Contact() {
                   className="min-h-[120px] resize-y rounded-[2px] border border-[var(--color-border)] bg-cream px-4 py-3 text-[0.9rem] text-ink outline-none transition-colors focus:border-accent"
                 />
               </div>
-              <button type="submit" className="btn-primary mt-2 self-start">
+              <button type="submit" className="btn-primary self-start">
                 Skicka förfrågan
               </button>
               {notice && (
                 <p
                   role="status"
-                  className="rounded border border-accent/20 bg-accent-light px-4 py-3 text-[0.85rem] text-accent-dark"
+                  className="rounded-[2px] border border-accent/20 bg-accent-light px-4 py-3 text-[0.85rem] text-accent-dark"
                 >
                   {contact.formNotice}{" "}
                   <a href={site.phoneHref} className="font-medium underline">

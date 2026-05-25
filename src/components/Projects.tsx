@@ -7,6 +7,52 @@ const spanClasses = {
   wide: "md:col-span-8 md:row-span-4",
 } as const;
 
+type Placeholder = (typeof projects.placeholders)[number];
+
+function getLayoutClass(index: number): string {
+  if (index === 0) return spanClasses.large;
+  if (index === 1) return spanClasses.medium;
+  if (index === 2 || index === 3) return spanClasses.small;
+  if (index === 4) return "md:col-span-4 md:row-span-4";
+  return spanClasses.wide;
+}
+
+function getResponsiveSpan(index: number): string {
+  if (index === 0 || index === 5) return "sm:col-span-2";
+  return "";
+}
+
+function ProjectCard({
+  item,
+  layoutClass,
+  responsiveSpan,
+}: {
+  item: Placeholder;
+  layoutClass: string;
+  responsiveSpan: string;
+}) {
+  return (
+    <article
+      className={`group relative min-h-[140px] overflow-hidden rounded-[2px] border border-white/[0.08] bg-white/[0.07] transition-colors hover:border-white/15 md:min-h-0 ${layoutClass} ${responsiveSpan}`}
+    >
+      {/* Ersätts med next/image: className="absolute inset-0 h-full w-full object-cover" */}
+      <div
+        className="absolute inset-0 bg-white/[0.04] transition-colors duration-500 group-hover:bg-white/[0.08]"
+        aria-hidden
+      />
+
+      <div className="relative flex h-full min-h-[140px] items-end p-4 transition-transform duration-500 ease-out group-hover:scale-[1.02] md:min-h-0">
+        <span className="text-sm font-medium text-white/85">
+          {item.label}
+          <span className="mt-0.5 block text-[0.8rem] font-normal text-white/40">
+            Bild kommer
+          </span>
+        </span>
+      </div>
+    </article>
+  );
+}
+
 export function Projects() {
   return (
     <section id="projekt" className="bg-ink py-[5.5rem]">
@@ -16,32 +62,14 @@ export function Projects() {
         <p className="mb-12 mt-4 text-[0.9rem] text-white/50">{projects.lead}</p>
 
         <div className="grid auto-rows-[60px] grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-12">
-          {projects.placeholders.map((item, i) => {
-            const layout =
-              i === 0
-                ? spanClasses.large
-                : i === 1
-                  ? spanClasses.medium
-                  : i === 2 || i === 3
-                    ? spanClasses.small
-                    : i === 4
-                      ? "md:col-span-4 md:row-span-4"
-                      : spanClasses.wide;
-
-            return (
-              <div
-                key={`${item.label}-${i}`}
-                className={`flex min-h-[140px] items-end rounded-[3px] border border-white/[0.08] bg-white/[0.07] p-4 text-[0.75rem] text-white/25 transition-colors hover:bg-white/10 md:min-h-0 ${layout} ${
-                  i === 0 ? "sm:col-span-2" : ""
-                } ${i === 5 ? "sm:col-span-2" : ""}`}
-              >
-                <span>
-                  {item.label}
-                  <span className="block text-white/15">Bild kommer</span>
-                </span>
-              </div>
-            );
-          })}
+          {projects.placeholders.map((item, i) => (
+            <ProjectCard
+              key={`${item.label}-${i}`}
+              item={item}
+              layoutClass={getLayoutClass(i)}
+              responsiveSpan={getResponsiveSpan(i)}
+            />
+          ))}
         </div>
       </div>
     </section>

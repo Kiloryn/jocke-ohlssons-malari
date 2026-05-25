@@ -16,7 +16,7 @@ export function Trust() {
             return (
               <article
                 key={item.title}
-                className="rounded border border-[var(--color-border)] bg-white p-8"
+                className="rounded-[2px] border border-[var(--color-border)] bg-white p-8"
               >
                 <Icon className="mb-4 h-6 w-6 stroke-accent" strokeWidth={1.5} />
                 <h3 className="text-[0.95rem] font-medium">{item.title}</h3>

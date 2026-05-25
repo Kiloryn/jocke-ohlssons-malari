@@ -5,7 +5,7 @@ export function About() {
   return (
     <section id="om" className="bg-cream py-[5.5rem]">
       <div className="container-page">
-        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-20">
+        <div className="grid items-start gap-10 md:grid-cols-2 md:gap-20">
           <div>
             <span className="label">{about.label}</span>
             <h2 className="section-title">
@@ -31,7 +31,7 @@ export function About() {
           </div>
 
           <div
-            className="flex h-[280px] flex-col items-center justify-center gap-2 rounded border border-accent/10 bg-accent-light shadow-sm md:h-[440px]"
+            className="flex h-[280px] flex-col items-center justify-center gap-2 rounded-[2px] border border-accent/10 bg-accent-light shadow-sm md:h-[440px]"
             role="img"
             aria-label={about.photoPlaceholder}
           >
