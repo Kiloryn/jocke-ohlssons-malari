@@ -78,10 +78,10 @@ export const projects = {
   lead: "Bilderna nedan ersätts med Jockes egna projektfoton.",
   placeholders: [
     { label: "Inomhus", gridSpan: { md: "md:col-span-7 md:row-span-6", sm: "sm:col-span-2" } },
-    { label: "Utomhus", gridSpan: { md: "md:col-span-5 md:row-span-4" } },
-    { label: "Fasad", gridSpan: { md: "md:col-span-2 md:row-span-4" } },
-    { label: "Tapet", gridSpan: { md: "md:col-span-2 md:row-span-4" } },
-    { label: "Inomhus", gridSpan: { md: "md:col-span-2 md:row-span-4" } },
+    { label: "Utomhus", gridSpan: { md: "md:col-span-5 md:row-span-4", sm: "" } },
+    { label: "Fasad", gridSpan: { md: "md:col-span-2 md:row-span-4", sm: "" } },
+    { label: "Tapet", gridSpan: { md: "md:col-span-2 md:row-span-4", sm: "" } },
+    { label: "Inomhus", gridSpan: { md: "md:col-span-2 md:row-span-4", sm: "" } },
     { label: "Utomhus", gridSpan: { md: "md:col-span-8 md:row-span-4", sm: "sm:col-span-2" } },
   ],
 } as const;
