@@ -4,6 +4,17 @@ import { hero } from "@/lib/content";
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-[var(--color-border)]">
+      {/* Bakgrundsbild (draft) */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 bg-no-repeat opacity-[0.22]"
+        style={{
+          backgroundImage: "url(/Hero-color-background.webp)",
+          // Full bredd (kan klippa lite på höjden beroende på bildformat)
+          backgroundSize: "100% auto",
+          backgroundPosition: "center top",
+        }}
+        aria-hidden
+      />
       <div
         className="pointer-events-none absolute -right-24 -top-24 h-[420px] w-[420px] rounded-full bg-accent-light/80 blur-3xl"
         aria-hidden

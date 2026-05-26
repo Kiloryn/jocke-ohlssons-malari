@@ -65,3 +65,5 @@ next-env.d.ts
 # Editors / IDEs
 .vscode/
 .idea/
+AGENTS.md
+CLAUDE.md

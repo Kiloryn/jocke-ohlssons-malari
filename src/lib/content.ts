@@ -96,28 +96,38 @@ export const projects = {
     {
       label: "Inomhus",
       gridSpan: { md: "md:col-span-7 md:row-span-6", sm: "sm:col-span-2" },
-      // imageSrc: "/projects/inomhus-1.jpg",
-      // alt: "Inomhusmålning",
+      imageSrc: "/exempelbilder/inomhus.webp",
+      alt: "Exempelbild: Inomhusmålning",
     },
     {
       label: "Utomhus",
       gridSpan: { md: "md:col-span-5 md:row-span-4", sm: "" },
+      imageSrc: "/exempelbilder/utomhus.webp",
+      alt: "Exempelbild: Utomhusmålning",
     },
     {
       label: "Fasad",
       gridSpan: { md: "md:col-span-2 md:row-span-4", sm: "" },
+      imageSrc: "/exempelbilder/fasad.webp",
+      alt: "Exempelbild: Fasad",
     },
     {
       label: "Tapet",
       gridSpan: { md: "md:col-span-2 md:row-span-4", sm: "" },
+      imageSrc: "/exempelbilder/tapet.webp",
+      alt: "Exempelbild: Tapetsering",
     },
     {
       label: "Inomhus",
       gridSpan: { md: "md:col-span-2 md:row-span-4", sm: "" },
+      imageSrc: "/exempelbilder/inomhus2.webp",
+      alt: "Exempelbild: Inomhusmålning",
     },
     {
       label: "Utomhus",
       gridSpan: { md: "md:col-span-8 md:row-span-4", sm: "sm:col-span-2" },
+      imageSrc: "/exempelbilder/utomhus2.webp",
+      alt: "Exempelbild: Utomhusmålning",
     },
   ] satisfies ProjectItem[],
 } as const;
