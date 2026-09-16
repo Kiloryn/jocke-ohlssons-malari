@@ -70,3 +70,6 @@ next-env.d.ts
 .idea/
 AGENTS.md
 CLAUDE.md
+/dist/
+.vinext/
+.wrangler/
