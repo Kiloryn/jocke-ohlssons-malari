@@ -15,15 +15,19 @@ export function Faq() {
           <h2 className="section-title">{faq.title}</h2>
         </div>
 
-        <div className="mt-12 md:mt-0 md:col-span-8 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
+        <div className="mt-12 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] md:col-span-8 md:mt-0">
           {faq.items.map((item, i) => {
             const isOpen = openIndex === i;
+            const triggerId = `faq-trigger-${i}`;
+            const panelId = `faq-panel-${i}`;
             return (
               <div key={item.question}>
                 <button
                   type="button"
+                  id={triggerId}
                   className="flex w-full items-center justify-between gap-4 py-5 text-left text-[0.95rem] font-medium text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   aria-expanded={isOpen}
+                  aria-controls={panelId}
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                 >
                   {item.question}
@@ -33,7 +37,10 @@ export function Faq() {
                     }`}
                   />
                 </button>
-                                <div
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={triggerId}
                   className={`grid transition-all duration-300 ${
                     isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                   }`}

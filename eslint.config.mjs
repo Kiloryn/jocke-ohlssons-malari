@@ -15,6 +15,7 @@ const eslintConfig = defineConfig([
     // Local tools / internal skill folders (not part of the website source):
     ".minimax/**",
     ".continue/**",
+    "source-photos/**",
   ]),
 ]);
 

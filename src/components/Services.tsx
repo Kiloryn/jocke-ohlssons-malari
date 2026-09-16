@@ -1,27 +1,35 @@
-import { Building2, Heart, Home, Layers } from "lucide-react";
+import Image from "next/image";
 import { services } from "@/lib/content";
 
-const icons = {
-  home: Home,
-  building: Building2,
-  layers: Layers,
-  heart: Heart,
-} as const;
-
-type ServiceItem = (typeof services.items)[number];
-
-function ServiceCard({ item }: { item: ServiceItem }) {
-  const Icon = icons[item.icon];
-
+function ServiceCard({
+  title,
+  description,
+  images,
+}: (typeof services.groups)[number]["items"][number]) {
   return (
-    <article className="group flex h-full flex-col bg-white p-9 transition-colors hover:bg-cream focus-within:bg-cream">
-      <div className="mb-5 flex h-[42px] w-[42px] items-center justify-center rounded-full bg-accent-light transition-transform group-hover:scale-105">
-        <Icon className="h-5 w-5 stroke-accent" strokeWidth={1.5} aria-hidden />
+    <article className="flex h-full flex-col overflow-hidden bg-white">
+      <div
+        className={`relative grid overflow-hidden ${
+          images.length > 1 ? "grid-cols-2" : "grid-cols-1"
+        }`}
+      >
+        {images.map((image) => (
+          <div key={image.src} className="relative aspect-[4/3]">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover"
+              style={{ objectPosition: image.position ?? "50% 50%" }}
+            />
+          </div>
+        ))}
       </div>
-      <h3 className="mb-2 text-[0.95rem] font-medium text-ink">{item.title}</h3>
-      <p className="text-[0.85rem] leading-[1.6] text-ink-soft">
-        {item.description}
-      </p>
+      <div className="flex flex-1 flex-col p-5 sm:p-7">
+        <h4 className="mb-2 text-[0.95rem] font-medium text-ink">{title}</h4>
+        <p className="text-[0.85rem] leading-[1.6] text-ink-soft">{description}</p>
+      </div>
     </article>
   );
 }
@@ -44,13 +52,22 @@ export function Services() {
           </p>
         </div>
 
-        <div
-          className="grid grid-cols-1 gap-px overflow-hidden rounded-[2px] border border-[var(--color-border)] bg-[var(--color-border)] sm:grid-cols-2 lg:grid-cols-4"
-          role="list"
-        >
-          {services.items.map((item) => (
-            <div key={item.title} role="listitem" className="min-h-0">
-              <ServiceCard item={item} />
+        <div className="space-y-12">
+          {services.groups.map((group) => (
+            <div key={group.id}>
+              <h3 className="mb-5 font-serif text-[1.35rem] text-ink">
+                {group.title}
+              </h3>
+              <div
+                className="grid grid-cols-1 gap-px overflow-hidden rounded-[2px] border border-[var(--color-border)] bg-[var(--color-border)] sm:grid-cols-2"
+                role="list"
+              >
+                {group.items.map((item) => (
+                  <div key={item.title} role="listitem" className="min-h-0">
+                    <ServiceCard {...item} />
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

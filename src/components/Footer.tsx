@@ -1,4 +1,5 @@
-import { Globe, MapPin, Phone } from "lucide-react";
+import Image from "next/image";
+import { Globe, Mail, MapPin, Phone } from "lucide-react";
 import { InstagramIcon } from "@/components/InstagramIcon";
 import { navLinks, site } from "@/lib/content";
 
@@ -73,11 +74,20 @@ export function Footer() {
     <footer className="border-t border-white/12 bg-accent-dark">
       <div className="container-page py-12 md:py-14">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-10 lg:gap-y-0">
-          {/* Kolumn 1 — varumärke */}
           <div className="flex flex-col">
-            <FooterColumnHeading serif>{site.name}</FooterColumnHeading>
+            <div className="flex min-h-[2.75rem] items-end">
+              <span className="inline-flex rounded-full bg-cream p-1">
+                <Image
+                  src={site.logo.src}
+                  alt={site.logo.alt}
+                  width={56}
+                  height={56}
+                  className="h-14 w-14 object-contain"
+                />
+              </span>
+            </div>
             <p className="mt-4 text-[0.85rem] leading-relaxed text-white/65">
-              {site.tagline}. Uppdrag i {site.serviceArea.toLowerCase()}.
+              {site.name}. Uppdrag i {site.serviceArea}. Sedan {site.founded}.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {badges.map((badge) => (
@@ -91,7 +101,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Kolumn 2 — sidor */}
           <div className="flex flex-col">
             <FooterColumnHeading>Sidor</FooterColumnHeading>
             <ul className="mt-4 flex flex-col gap-2.5">
@@ -108,12 +117,14 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Kolumn 3 — kontakt */}
           <div className="flex flex-col">
             <FooterColumnHeading>Kontakt</FooterColumnHeading>
             <ul className="mt-4 flex flex-col gap-3">
               <ContactRow icon={Phone} href={site.phoneHref}>
                 {site.phone}
+              </ContactRow>
+              <ContactRow icon={Mail} href={site.emailHref}>
+                {site.email}
               </ContactRow>
               <ContactRow icon={MapPin}>
                 {site.location}, {site.region}
@@ -122,7 +133,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Kolumn 4 — CTA & Instagram */}
           <div className="flex flex-col">
             <FooterColumnHeading>Kom igång</FooterColumnHeading>
             <div className="mt-4 flex flex-col gap-4">

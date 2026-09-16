@@ -43,6 +43,9 @@ yarn-error.log*
 # Släpp igenom .env.example om den finns så teamet vet vilka variabler som behövs
 !.env.example
 
+# Unoptimized source photos (keep production WebP/PNG in /public)
+/source-photos/
+
 # vercel
 .vercel
 

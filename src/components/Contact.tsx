@@ -92,7 +92,7 @@ export function Contact() {
               {contact.rows.map((row) => (
                 <div
                   key={row.key}
-                  className="flex items-center justify-between border-b border-[var(--color-border)] py-4 first:border-t"
+                  className="flex flex-col gap-1 border-b border-[var(--color-border)] py-4 first:border-t sm:flex-row sm:items-center sm:justify-between sm:gap-4"
                 >
                   <span className="text-[0.8rem] uppercase tracking-wider text-ink-soft">
                     {row.key}
@@ -150,11 +150,12 @@ export function Contact() {
                   required
                   placeholder="Ditt namn"
                   aria-invalid={Boolean(fieldErrors.name)}
-                  className="rounded-[2px] border border-[var(--color-border)] bg-white px-4 py-3 text-[0.9rem] text-ink outline-none transition-colors focus:border-accent aria-[invalid=true]:border-red-400"
+                  aria-describedby={fieldErrors.name ? "name-error" : undefined}
+                  className="min-h-12 rounded-[2px] border border-[var(--color-border)] bg-white px-4 py-3 text-[0.95rem] text-ink outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/20 aria-[invalid=true]:border-red-500"
                   disabled={status === "sending"}
                 />
                 {fieldErrors.name && (
-                  <p className="text-[0.82rem] text-red-600">{fieldErrors.name}</p>
+                  <p id="name-error" className="text-[0.82rem] text-red-700">{fieldErrors.name}</p>
                 )}
               </div>
               <div className="flex flex-col gap-1.5">
@@ -172,11 +173,12 @@ export function Contact() {
                   required
                   placeholder="Hur vi når dig"
                   aria-invalid={Boolean(fieldErrors.contact)}
-                  className="rounded-[2px] border border-[var(--color-border)] bg-white px-4 py-3 text-[0.9rem] text-ink outline-none transition-colors focus:border-accent aria-[invalid=true]:border-red-400"
+                  aria-describedby={fieldErrors.contact ? "contact-error" : undefined}
+                  className="min-h-12 rounded-[2px] border border-[var(--color-border)] bg-white px-4 py-3 text-[0.95rem] text-ink outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/20 aria-[invalid=true]:border-red-500"
                   disabled={status === "sending"}
                 />
                 {fieldErrors.contact && (
-                  <p className="text-[0.82rem] text-red-600">
+                  <p id="contact-error" className="text-[0.82rem] text-red-700">
                     {fieldErrors.contact}
                   </p>
                 )}
@@ -194,11 +196,12 @@ export function Contact() {
                   required
                   placeholder="Beskriv ditt projekt kort — typ av jobb, ungefär var och när…"
                   aria-invalid={Boolean(fieldErrors.msg)}
-                  className="min-h-[120px] resize-y rounded-[2px] border border-[var(--color-border)] bg-white px-4 py-3 text-[0.9rem] text-ink outline-none transition-colors focus:border-accent aria-[invalid=true]:border-red-400"
+                  aria-describedby={fieldErrors.msg ? "msg-error" : undefined}
+                  className="min-h-[140px] resize-y rounded-[2px] border border-[var(--color-border)] bg-white px-4 py-3 text-[0.95rem] text-ink outline-none transition-colors focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/20 aria-[invalid=true]:border-red-500"
                   disabled={status === "sending"}
                 />
                 {fieldErrors.msg && (
-                  <p className="text-[0.82rem] text-red-600">{fieldErrors.msg}</p>
+                  <p id="msg-error" className="text-[0.82rem] text-red-700">{fieldErrors.msg}</p>
                 )}
               </div>
               <button
