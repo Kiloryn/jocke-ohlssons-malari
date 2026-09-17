@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Photo } from "@/components/Photo";
 import { hero } from "@/lib/content";
 
 export function Hero() {
@@ -49,7 +49,7 @@ export function Hero() {
 
           <div className="md:col-span-5 md:flex md:justify-end">
             <div className="relative h-[280px] w-full max-w-[520px] overflow-hidden rounded-[2px] border border-[var(--color-border)] shadow-sm sm:h-[360px] md:h-[520px]">
-              <Image
+              <Photo
                 src={hero.image.src}
                 alt={hero.image.alt}
                 fill

@@ -82,6 +82,7 @@ export function Footer() {
                   alt={site.logo.alt}
                   width={56}
                   height={56}
+                  quality={90}
                   className="h-14 w-14 object-contain"
                 />
               </span>

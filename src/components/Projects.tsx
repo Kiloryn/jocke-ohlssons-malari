@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { Photo } from "@/components/Photo";
 import { X } from "lucide-react";
 import { projects, type ProjectItem } from "@/lib/content";
 
@@ -26,7 +26,7 @@ function ProjectCard({
     >
       {item.imageSrc ? (
         <>
-          <Image
+          <Photo
             src={item.imageSrc}
             alt={item.alt ?? item.label}
             fill
@@ -172,15 +172,15 @@ export function Projects() {
             </button>
 
             <div className="relative h-[min(65vh,28rem)] min-h-[220px] w-full bg-black/10 sm:h-[70vh] sm:min-h-[320px]">
-              <Image
+              <Photo
                 src={active.imageSrc}
                 alt={active.alt ?? active.label}
                 fill
-                sizes="100vw"
+                sizes="(min-width: 1100px) 1100px, 100vw"
                 className={`object-contain transition-transform duration-300 ease-out motion-reduce:transition-none ${
                   lightboxOpen ? "scale-100" : "scale-[1.02]"
                 }`}
-                priority={false}
+                priority
               />
             </div>
           </div>

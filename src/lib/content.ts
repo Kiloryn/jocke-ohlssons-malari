@@ -46,7 +46,7 @@ export const site: SiteInfo = {
   teamPhoto: {
     src: "/om-oss/jocke-ohlssons-maleri-teamet.webp",
     alt: "Teamet på Jocke Ohlssons Måleri vid elbilarna i Töreboda",
-    position: "50% 42%",
+    position: "50% 50%",
   },
 };
 

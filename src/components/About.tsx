@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Photo } from "@/components/Photo";
 import { about, site } from "@/lib/content";
 
 export function About() {
@@ -29,8 +29,8 @@ export function About() {
           </div>
         </div>
 
-        <figure className="relative mt-10 aspect-[4/3] overflow-hidden rounded-[2px] border border-[var(--color-border)] bg-accent-light sm:aspect-[2.3/1] sm:min-h-[220px]">
-          <Image
+        <figure className="relative mt-10 aspect-[16/9] overflow-hidden rounded-[2px] border border-[var(--color-border)] bg-accent-light sm:aspect-[2.35/1] sm:min-h-[240px]">
+          <Photo
             src={site.teamPhoto.src}
             alt={site.teamPhoto.alt}
             fill
