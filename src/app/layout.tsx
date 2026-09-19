@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { DM_Sans, Playfair_Display } from "next/font/google";
-import "./globals.css";
+import { JsonLd } from "@/components/JsonLd";
 import { site } from "@/lib/content";
+import { SITE_URL } from "@/lib/siteUrl";
+import "./globals.css";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -16,16 +18,24 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  // Update this to your final production domain when deploying.
-  metadataBase: new URL("https://example.com"),
+  metadataBase: new URL(SITE_URL),
   title: `${site.name} – Måleri i Skaraborg & hela Sverige`,
-  description: `${site.name} i Töreboda. Inomhus- och utomhusmålning, fasadrenovering och tapetsering. Bas i Skaraborg — uppdrag i hela Sverige.`,
+  description: `${site.name} i Töreboda, sedan ${site.founded}. Inomhus- och utomhusmålning, tapetsering och fasad. Bas i Skaraborg — uppdrag i hela Sverige.`,
+  icons: {
+    icon: [
+      {
+        url: "/logo/jocke-ohlssons-maleri-logotyp.png",
+        type: "image/png",
+      },
+    ],
+    apple: "/logo/jocke-ohlssons-maleri-logotyp.png",
+  },
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: site.name,
-    description: `Måleri med bas i ${site.region}. Uppdrag i hela Sverige.`,
+    description: `Måleri med bas i ${site.region}. Uppdrag i hela Sverige. Sedan ${site.founded}.`,
     locale: "sv_SE",
     type: "website",
     images: [
@@ -51,8 +61,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="sv" className={`${dmSans.variable} ${playfair.variable}`}>
-      <body className="antialiased">
+    <html lang="sv" className={`${dmSans.variable} ${playfair.variable}`} suppressHydrationWarning>
+      <body className="antialiased" suppressHydrationWarning>
+        <JsonLd />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[200] focus:rounded focus:bg-accent focus:px-4 focus:py-2 focus:text-white"

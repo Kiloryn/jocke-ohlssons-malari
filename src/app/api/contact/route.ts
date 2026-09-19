@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 
 type ContactPayload = {
   name?: unknown;
@@ -73,6 +72,7 @@ export async function POST(request: Request) {
     );
   }
 
+  const { default: nodemailer } = await import("nodemailer");
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT),

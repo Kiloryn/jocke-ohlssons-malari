@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import { Menu, Phone, X } from "lucide-react";
 import { navLinks, site } from "@/lib/content";
 
 export function Header() {
@@ -88,15 +89,27 @@ export function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-[100] flex items-center justify-between px-6 py-4 backdrop-blur-md transition-all duration-300 md:px-10 bg-cream/90 ${
+        className={`fixed inset-x-0 top-0 z-[100] flex h-[4.25rem] items-center justify-between gap-3 px-5 backdrop-blur-md transition-all duration-300 sm:h-[4.5rem] sm:px-6 md:px-10 bg-cream/95 ${
           scrolled ? "shadow-sm border-b border-[var(--color-border)]" : ""
         }`}
       >
         <a
           href="#"
-          className="font-serif text-[1.05rem] font-semibold tracking-[0.01em] text-ink"
+          className="flex items-center gap-2 text-ink sm:gap-2.5"
+          aria-label={site.name}
         >
-          {site.name}
+          <Image
+            src={site.logo.src}
+            alt=""
+            width={40}
+            height={40}
+            quality={90}
+            className="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
+            priority
+          />
+          <span className="font-serif text-[0.9rem] font-semibold leading-tight tracking-[0.01em] sm:text-[1.05rem]">
+            {site.name}
+          </span>
         </a>
 
         <ul className="hidden list-none gap-8 md:flex">
@@ -106,13 +119,20 @@ export function Header() {
                 href={link.href}
                 className="text-sm font-medium tracking-[0.02em] text-ink-soft transition-colors hover:text-ink"
               >
-{link.label}
+                {link.label}
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-3">
+          <a
+            href={site.phoneHref}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-[2px] text-ink sm:hidden"
+            aria-label={`Ring ${site.phone}`}
+          >
+            <Phone size={20} strokeWidth={1.75} />
+          </a>
           <a href={site.phoneHref} className="nav-cta hidden sm:inline-block">
             {site.phone}
           </a>
@@ -129,6 +149,8 @@ export function Header() {
           </button>
         </div>
       </header>
+      {/* Matches the fixed header so page content isn't hidden underneath. */}
+      <div className="h-[4.25rem] sm:h-[4.5rem]" aria-hidden />
 
       <div
         className={`fixed inset-0 z-[90] transition-opacity duration-300 backdrop-blur-sm bg-ink/30 md:hidden ${
@@ -144,6 +166,7 @@ export function Header() {
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
         aria-hidden={!menuOpen}
+        inert={!menuOpen ? true : undefined}
         ref={mobileMenuRef}
       >
         {navLinks.map((link) => (

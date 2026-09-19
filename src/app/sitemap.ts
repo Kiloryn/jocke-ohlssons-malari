@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const SITE_URL = "https://example.com"; // Replace on deploy
+import { SITE_URL } from "@/lib/siteUrl";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -10,4 +9,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 }
-

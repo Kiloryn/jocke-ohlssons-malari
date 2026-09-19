@@ -9,12 +9,14 @@ const eslintConfig = defineConfig([
   globalIgnores([
     // Default ignores of eslint-config-next:
     ".next/**",
+    "dist/**",
     "out/**",
     "build/**",
     "next-env.d.ts",
     // Local tools / internal skill folders (not part of the website source):
     ".minimax/**",
     ".continue/**",
+    "source-photos/**",
   ]),
 ]);
 

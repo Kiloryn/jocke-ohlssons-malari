@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { site } from "@/lib/content";
 
 export const size = {
@@ -8,7 +10,12 @@ export const size = {
 
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  const logo = await readFile(
+    join(process.cwd(), "public/logo/jocke-ohlssons-maleri-logotyp.png"),
+  );
+  const logoSrc = `data:image/png;base64,${logo.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -43,13 +50,23 @@ export default function OpenGraphImage() {
           }}
         />
 
-        <div style={{ position: "relative", display: "flex", gap: 18 }}>
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+            gap: 40,
+          }}
+        >
+          {/* OG canvas cannot use next/image */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={logoSrc} alt="" width={168} height={168} />
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: 18,
-              maxWidth: 980,
+              gap: 16,
+              maxWidth: 820,
             }}
           >
             <div
@@ -64,7 +81,7 @@ export default function OpenGraphImage() {
             </div>
             <div
               style={{
-                fontSize: 78,
+                fontSize: 64,
                 lineHeight: 1.05,
                 letterSpacing: "-0.02em",
                 fontWeight: 600,
@@ -74,17 +91,17 @@ export default function OpenGraphImage() {
             </div>
             <div
               style={{
-                fontSize: 30,
+                fontSize: 28,
                 lineHeight: 1.35,
                 color: "#64645e",
               }}
             >
-              {`Måleri med bas i ${site.region}. Uppdrag i hela Sverige.`}
+              {`Måleri med bas i ${site.region}. Sedan ${site.founded}.`}
             </div>
           </div>
         </div>
       </div>
     ),
-    size
+    size,
   );
 }

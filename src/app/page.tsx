@@ -8,6 +8,7 @@ import { Process } from "@/components/Process";
 import { Projects } from "@/components/Projects";
 import { Services } from "@/components/Services";
 import { Trust } from "@/components/Trust";
+import { Turnkey } from "@/components/Turnkey";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Services />
+        <Turnkey />
         <About />
         <Projects />
         <Process />
