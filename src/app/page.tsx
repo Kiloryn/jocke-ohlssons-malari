@@ -1,5 +1,6 @@
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
+import { CtaBand } from "@/components/CtaBand";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -20,6 +21,7 @@ export default function Home() {
         <Turnkey />
         <About />
         <Projects />
+        <CtaBand />
         <Process />
         <Trust />
         <Faq />
