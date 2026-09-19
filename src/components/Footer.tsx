@@ -1,9 +1,8 @@
 import Image from "next/image";
 import { Globe, Mail, MapPin, Phone } from "lucide-react";
+import { FooterYear } from "@/components/FooterYear";
 import { InstagramIcon } from "@/components/InstagramIcon";
 import { navLinks, site } from "@/lib/content";
-
-const year = new Date().getFullYear();
 
 const badges = ["F-skatt", "Försäkrade", "Elbilar"] as const;
 
@@ -158,7 +157,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-white/12 pt-8 text-[0.78rem] text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} {site.name}. Alla rättigheter förbehållna.
+            © <FooterYear /> {site.name}. Alla rättigheter förbehållna.
           </p>
           <p className="text-white/55">
             {site.location} · {site.region} · {site.serviceArea}
