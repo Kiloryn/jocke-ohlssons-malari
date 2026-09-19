@@ -8,7 +8,6 @@ import { Hero } from "@/components/Hero";
 import { Process } from "@/components/Process";
 import { Projects } from "@/components/Projects";
 import { Services } from "@/components/Services";
-import { Trust } from "@/components/Trust";
 import { Turnkey } from "@/components/Turnkey";
 
 export default function Home() {
@@ -23,7 +22,6 @@ export default function Home() {
         <Projects />
         <CtaBand />
         <Process />
-        <Trust />
         <Faq />
         <Contact />
       </main>

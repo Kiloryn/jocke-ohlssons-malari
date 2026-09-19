@@ -45,7 +45,7 @@ body {
 
 @layer components {
   .label {
-    @apply mb-4 block text-[0.72rem] font-medium uppercase tracking-[0.18em] text-accent;
+    @apply mb-3 block text-[0.95rem] text-accent;
   }
 
   .section-title {

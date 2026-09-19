@@ -4,37 +4,27 @@ import { about, site } from "@/lib/content";
 export function About() {
   return (
     <section id="om" className="bg-cream py-[5.5rem]">
-      <div className="container-page">
-        <div className="max-w-[640px]">
+      <div className="container-page grid items-center gap-10 md:grid-cols-12 md:gap-14">
+        <div className="md:col-span-5">
           <span className="label">{about.label}</span>
           <h2 className="section-title">
             {about.title}
             <br />
             {about.titleLine2}
           </h2>
-          <div className="my-6 space-y-4 text-ink-soft leading-[1.75]">
+          <div className="mt-6 space-y-4 text-[0.98rem] leading-[1.75] text-ink-soft">
             {about.paragraphs.map((p) => (
               <p key={p}>{p}</p>
             ))}
           </div>
-          <div className="flex flex-wrap gap-2.5">
-            {about.badges.map((badge) => (
-              <span
-                key={badge}
-                className="rounded-full bg-accent-light px-[0.9rem] py-[0.35rem] text-[0.78rem] font-medium text-accent-dark"
-              >
-                {badge}
-              </span>
-            ))}
-          </div>
         </div>
 
-        <figure className="relative mt-10 aspect-[16/9] overflow-hidden rounded-[2px] border border-[var(--color-border)] bg-accent-light sm:aspect-[2.35/1] sm:min-h-[240px]">
+        <figure className="relative aspect-[16/10] overflow-hidden md:col-span-7 md:min-h-[22rem]">
           <Photo
             src={site.teamPhoto.src}
             alt={site.teamPhoto.alt}
             fill
-            sizes="(min-width: 1100px) 1100px, 100vw"
+            sizes="(min-width: 1100px) 640px, 100vw"
             className="object-cover"
             style={{ objectPosition: site.teamPhoto.position }}
           />

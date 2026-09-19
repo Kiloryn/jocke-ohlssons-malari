@@ -58,7 +58,11 @@ next-env.d.ts
 .CLAUDE.md
 .minimax/
 .trae/
-.cursor/
+.cursor/*
+!.cursor/skills/
+!.cursor/skills/**
+!.cursor/rules/
+!.cursor/rules/**
 .continue/
 .comfyui/
 .copilot/

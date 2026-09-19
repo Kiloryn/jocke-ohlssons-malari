@@ -58,17 +58,10 @@ export const navLinks = [
 ] as const;
 
 export const hero = {
-  label: site.tagline,
-  title: "Målerier som",
-  titleEmphasis: "håller",
-  titleSuffix: ", länge.",
+  kicker: `Måleri från ${site.location}, sedan ${site.founded}.`,
+  title: "Målerier som håller, länge.",
   subtitle:
     "Vi utför alla typer av målningsuppdrag — med bas i Skaraborg och uppdrag i hela Sverige. Stor omsorg om hantverk, resultat och miljö.",
-  stats: ["Sedan 1974", "Skaraborg", "Hela Sverige", "Elbilar"],
-  image: {
-    src: "/projekt/trapanel-fasad-utomhus.webp",
-    alt: "Röd trähusfasad målad utomhus i Skaraborg",
-  },
 } as const;
 
 export type ServiceImage = {
