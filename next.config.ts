@@ -2,12 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    loader: "custom",
-    loaderFile: "./src/lib/imageLoader.ts",
+    // Project photos bypass the optimizer entirely (Photo.tsx renders plain
+    // <img> with pre-resized srcset variants). Only the logos go through
+    // next/image, marked unoptimized at their call sites.
     qualities: [75, 90],
-    // The loader maps these srcset widths to pre-resized files in /public
-    // (800/1600 variants + original).
-    deviceSizes: [800, 1600, 2200],
   },
   // Allow HMR/dev resources when the dev server is opened via the LAN IP
   // (e.g. http://192.168.1.231:3000 from another device on the network).
