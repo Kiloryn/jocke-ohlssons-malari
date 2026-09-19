@@ -73,3 +73,6 @@ CLAUDE.md
 /dist/
 .vinext/
 .wrangler/
+
+# Local audit artifacts (screenshots, scripts — not project source)
+/audit/
