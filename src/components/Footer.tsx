@@ -82,6 +82,7 @@ export function Footer() {
                   width={56}
                   height={56}
                   quality={90}
+                  unoptimized
                   className="h-14 w-14 object-contain"
                 />
               </span>
