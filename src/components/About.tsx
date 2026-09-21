@@ -7,11 +7,11 @@ export function About() {
       <div className="container-page grid items-center gap-10 md:grid-cols-12 md:gap-14">
         <div className="md:col-span-5">
           <span className="label">{about.label}</span>
-          <h2 className="section-title">
-            {about.title}
-            <br />
-            {about.titleLine2}
-          </h2>
+            <h2 className="section-title">
+              {about.title}{" "}
+              <br />
+              {about.titleLine2}
+            </h2>
           <div className="mt-6 space-y-4 text-[0.98rem] leading-[1.75] text-ink-soft">
             {about.paragraphs.map((p) => (
               <p key={p}>{p}</p>

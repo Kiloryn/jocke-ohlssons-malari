@@ -82,7 +82,7 @@ export function Contact() {
           <div>
             <span className="label">{contact.label}</span>
             <h2 className="section-title">
-              {contact.title}
+              {contact.title}{" "}
               <br />
               {contact.titleLine2}
             </h2>
@@ -122,9 +122,13 @@ export function Contact() {
           </div>
 
           <div>
-            <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+            <form
+              className="flex flex-col gap-5"
+              onSubmit={handleSubmit}
+              noValidate
+            >
               {/* Honeypot field (anti-spam). Must remain empty. */}
-              <div className="hidden" aria-hidden>
+              <div className="hidden" aria-hidden="true">
                 <label htmlFor="companyWebsite">Webbplats</label>
                 <input
                   id="companyWebsite"
@@ -169,7 +173,7 @@ export function Contact() {
                   type="text"
                   id="contact-field"
                   name="contact"
-                  autoComplete="tel"
+                  autoComplete="on"
                   required
                   placeholder="Hur vi når dig"
                   aria-invalid={Boolean(fieldErrors.contact)}
@@ -228,7 +232,7 @@ export function Contact() {
               {status === "notConfigured" && (
                 <p
                   role="status"
-                  className="rounded-[2px] border border-accent/20 bg-accent-light px-4 py-3 text-[0.85rem] text-accent-dark"
+                  className="rounded-[2px] border border-[var(--color-border)] bg-white px-4 py-3 text-[0.85rem] text-ink"
                 >
                   {contact.formNotice}{" "}
                   <a href={site.phoneHref} className="font-medium underline">

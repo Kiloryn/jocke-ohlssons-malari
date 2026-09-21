@@ -167,7 +167,7 @@ export function Header() {
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
         aria-hidden={!menuOpen}
-        inert={!menuOpen ? true : undefined}
+        inert={!menuOpen}
         ref={mobileMenuRef}
       >
         {navLinks.map((link) => (

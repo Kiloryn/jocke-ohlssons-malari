@@ -156,11 +156,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/12 pt-8 text-[0.78rem] text-white/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/12 pt-8 text-[0.78rem] text-white/65 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © <FooterYear /> {site.name}. Alla rättigheter förbehållna.
           </p>
-          <p className="text-white/55">
+          <p className="text-white/65">
             {site.location} · {site.region} · {site.serviceArea}
           </p>
         </div>

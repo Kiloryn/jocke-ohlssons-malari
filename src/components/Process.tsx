@@ -6,7 +6,7 @@ export function Process() {
       <div className="container-page">
         <span className="label">{process.label}</span>
         <h2 className="section-title max-w-[16ch]">
-          {process.title}
+          {process.title}{" "}
           <br />
           {process.titleLine2}
         </h2>

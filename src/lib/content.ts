@@ -197,7 +197,7 @@ export const about = {
   titleLine2: "i Skaraborg",
   paragraphs: [
     `Jocke Ohlssons Måleri är ett hantverksföretag från Töreboda, verksamt sedan ${site.founded}. Vi tar uppdrag hos privatpersoner och företag — främst i Skaraborg, men även i hela Sverige när projektet kräver det.`,
-    "Kvalitet och noggrannhet genomsyrar varje projekt — från förberedelse till sista penseldrag. Vi värnar dessutom om klimatet och framför våra fordon som elbilar.",
+    "Kvalitet och noggrannhet genomsyrar varje projekt — från förberedelse till sista penseldrag. Vi värnar om klimatet och kör elbilar.",
   ],
   badges: ["Sedan 1974", "F-skatt", "Försäkrade", "Elbilar", "Töreboda"],
 } as const;
