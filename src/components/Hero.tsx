@@ -23,7 +23,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="relative h-[50svh] min-h-[22rem] max-h-[30rem] overflow-hidden md:h-auto md:min-h-0 md:max-h-none">
+      <div className="relative hidden overflow-hidden md:block">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/hero-malare-tak.webp"

@@ -17,6 +17,13 @@ export function About() {
               <p key={p}>{p}</p>
             ))}
           </div>
+          <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2 border-t border-[var(--color-border)] pt-5">
+            {about.badges.map((badge) => (
+              <li key={badge} className="text-[0.84rem] text-ink">
+                {badge}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <figure className="relative aspect-[16/10] overflow-hidden md:col-span-7 md:min-h-[22rem]">

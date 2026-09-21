@@ -70,10 +70,13 @@ export type ServiceImage = {
   position?: string;
 };
 
+export type ServiceFrame = "lead" | "pair" | "wide" | "small";
+
 export type ServiceItem = {
   title: string;
   description: string;
   images: ServiceImage[];
+  frame: ServiceFrame;
 };
 
 export type ServiceGroup = {
@@ -93,26 +96,10 @@ export const services = {
       title: "Inomhusmålning",
       items: [
         {
-          title: "Tapetsering",
-          description:
-            "Vi hjälper dig skapa rätt känsla i rummet med professionell tapetsering. Mönstrat, enfärgat eller fototapet — vi har kunskapen som krävs för ett resultat på bästa möjliga nivå.",
-          images: [
-            {
-              src: "/projekt/tapetsering-monster-inomhus.webp",
-              alt: "Tapetsering med mönstrad tapet i rum med gungstol",
-              position: "50% 48%",
-            },
-            {
-              src: "/projekt/tapetsering-fototapet-landskapsmotiv.webp",
-              alt: "Fototapet med landskapsmotiv i offentlig miljö",
-              position: "50% 50%",
-            },
-          ],
-        },
-        {
           title: "Snickerier och paneler",
           description:
             "Vi målar alla typer av snickerier och paneler inomhus. Kanske en spegelpanel eller en platsbyggd bokhylla? Handmålat, sprutmålat, modern färg av högsta kvalitet eller linoljefärg — vi har kunskapen att förverkliga dina drömmar.",
+          frame: "lead",
           images: [
             {
               src: "/projekt/snickerier-paneler-inomhus.webp",
@@ -122,14 +109,20 @@ export const services = {
           ],
         },
         {
-          title: "Målning väggar och tak",
+          title: "Tapetsering",
           description:
-            "Vi hjälper dig att sätta färg på ditt rum med fokus på ett jämt, snyggt och hållbart resultat. Oavsett om du bara vill fräscha upp eller ge ditt hem ett helt nytt uttryck ser vi till att arbetet utförs noggrant från första penseldrag till färdigt resultat.",
+            "Vi hjälper dig skapa rätt känsla i rummet med professionell tapetsering. Mönstrat, enfärgat eller fototapet — vi har kunskapen som krävs för ett resultat på bästa möjliga nivå.",
+          frame: "pair",
           images: [
             {
-              src: "/projekt/malning-vaggar-tak.webp",
-              alt: "Nymålade vita väggar och tak i rum med högt i tak",
-              position: "50% 44%",
+              src: "/projekt/tapetsering-fototapet-landskapsmotiv.webp",
+              alt: "Fototapet med landskapsmotiv i offentlig miljö",
+              position: "50% 42%",
+            },
+            {
+              src: "/projekt/tapetsering-monster-inomhus.webp",
+              alt: "Tapetsering med mönstrad tapet i rum med gungstol",
+              position: "50% 48%",
             },
           ],
         },
@@ -137,11 +130,25 @@ export const services = {
           title: "Spackling",
           description:
             "Ett noggrant underarbete är grunden till ett proffsigt slutresultat. Oavsett om det är spackling av gips eller bredspackling är det här vi lägger grunden för ett utförande av absolut kvalitet.",
+          frame: "wide",
           images: [
             {
               src: "/projekt/spackling-underarbete.webp",
               alt: "Spackling av väggar och tak som underarbete",
-              position: "50% 48%",
+              position: "50% 42%",
+            },
+          ],
+        },
+        {
+          title: "Målning väggar och tak",
+          description:
+            "Vi hjälper dig att sätta färg på ditt rum med fokus på ett jämt, snyggt och hållbart resultat. Oavsett om du bara vill fräscha upp eller ge ditt hem ett helt nytt uttryck ser vi till att arbetet utförs noggrant från första penseldrag till färdigt resultat.",
+          frame: "small",
+          images: [
+            {
+              src: "/projekt/malning-vaggar-tak.webp",
+              alt: "Nymålade vita väggar och tak i rum med högt i tak",
+              position: "50% 36%",
             },
           ],
         },
@@ -155,6 +162,7 @@ export const services = {
           title: "Träpanel",
           description:
             "Vi målar och behandlar träfasader utomhus med noggrant förarbete och rätt produkter för ett hållbart och snyggt resultat. Vi hjälper dig att ge fasaden ett fräscht utseende samtidigt som fasaden skyddas mot väder och vind.",
+          frame: "lead",
           images: [
             {
               src: "/projekt/trapanel-fasad-utomhus.webp",
@@ -167,11 +175,12 @@ export const services = {
           title: "Tegel, puts och andra material",
           description:
             "Vi utför även målning på tegelfasad, puts, socklar, plåtfasader och andra utvändiga ytor. Med rätt förarbete och anpassade produkter skapar vi ett hållbart och enhetligt uttryck.",
+          frame: "small",
           images: [
             {
               src: "/projekt/tegel-puts-fasad.webp",
               alt: "Målning av tegelfasad utomhus",
-              position: "50% 50%",
+              position: "72% 38%",
             },
           ],
         },
@@ -329,6 +338,11 @@ export const faq = {
   title: "Frågor & svar",
   items: [
     {
+      question: "Vad kostar det att måla om?",
+      answer:
+        "Det beror på yta, skick och material. Vi ger alltid en kostnadsfri offert innan arbetet startar.",
+    },
+    {
       question: "Tar ni uppdrag utanför Skaraborg?",
       answer:
         "Ja. Vi har vår bas i Töreboda och tar de flesta uppdrag i Skaraborg, men utför även projekt i hela Sverige.",
@@ -342,11 +356,6 @@ export const faq = {
       question: "Hur får jag en offert?",
       answer:
         "Ring oss, mejla eller fyll i formuläret nedan. Beskriv kort typ av jobb, var och ungefär när — vi återkommer inom ett arbetsdygn.",
-    },
-    {
-      question: "Vad kostar det att måla om?",
-      answer:
-        "Det beror på yta, skick och material. Vi ger alltid en kostnadsfri offert innan arbetet startar.",
     },
   ],
 } as const;
