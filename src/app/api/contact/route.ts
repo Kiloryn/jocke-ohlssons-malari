@@ -27,6 +27,13 @@ export async function POST(request: Request) {
     );
   }
 
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    return NextResponse.json(
+      { ok: false, error: "Invalid JSON payload" },
+      { status: 400 }
+    );
+  }
+
   const name = asTrimmedString(data.name);
   const contact = asTrimmedString(data.contact);
   const msg = asTrimmedString(data.msg);
@@ -53,10 +60,7 @@ export async function POST(request: Request) {
   }
 
   const missing = missingEnv(
-    "SMTP_HOST",
-    "SMTP_PORT",
-    "SMTP_USER",
-    "SMTP_PASS",
+    "RESEND_API_KEY",
     "CONTACT_TO_EMAIL",
     "CONTACT_FROM_EMAIL"
   );
@@ -72,28 +76,35 @@ export async function POST(request: Request) {
     );
   }
 
-  const { default: nodemailer } = await import("nodemailer");
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: Number(process.env.SMTP_PORT) === 465,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
-
   const subject = `Offertförfrågan – ${name}`;
   const text = `Namn: ${name}\nKontakt: ${contact}\n\nMeddelande:\n${msg}\n`;
+  const replyTo = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(contact)
+    ? contact
+    : undefined;
 
   try {
-    await transporter.sendMail({
-      to: process.env.CONTACT_TO_EMAIL,
-      from: process.env.CONTACT_FROM_EMAIL,
-      replyTo: contact.includes("@") ? contact : undefined,
-      subject,
-      text,
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        to: [process.env.CONTACT_TO_EMAIL],
+        from: process.env.CONTACT_FROM_EMAIL,
+        reply_to: replyTo,
+        subject,
+        text,
+      }),
+      signal: AbortSignal.timeout(10_000),
     });
+
+    if (!response.ok) {
+      return NextResponse.json(
+        { ok: false, error: "Failed to send message" },
+        { status: 500 }
+      );
+    }
   } catch {
     return NextResponse.json(
       { ok: false, error: "Failed to send message" },

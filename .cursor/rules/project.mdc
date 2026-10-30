@@ -19,7 +19,7 @@ Swedish single-page site for a painting company in Töreboda / Skaraborg. Visito
 - Copy and business facts: `src/lib/content.ts`
 - Page composition: `src/app/page.tsx` and `src/components/`
 - Project photos: `Photo.tsx` plus pre-resized `public/` srcset variants. Do not send those photos through the image optimizer.
-- Contact form: `src/app/api/contact/route.ts`. SMTP keys are listed in `.env.example`.
+- Contact form: `src/app/api/contact/route.ts`. Resend configuration is listed in `.env.example`.
 
 The established cream / ink / green palette and Playfair + DM Sans pairing is this site's brief, not generic template chrome to rip out by default. Still reject *new* generic AI-template patterns (SaaS card kits, purple gradients, scattered fade-up, decorative numbered markers). Existing code is evidence, not a freeze — better implementations are allowed when the task justifies them.
 
