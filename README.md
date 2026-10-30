@@ -38,12 +38,26 @@ Unoptimized originals stay in `source-photos/` (gitignored).
 
 The contact form posts to `/api/contact`.
 
-To enable email sending, copy `.env.example` → `.env.local` and fill in SMTP credentials:
+To enable email sending, copy `.env.example` → `.env.local` and configure Resend:
 
-- `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`
+- `RESEND_API_KEY` (sending access to the verified domain)
 - `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`
 
 If not configured, the UI tells the visitor to call instead (phone CTA).
+
+On Cloudflare, store `RESEND_API_KEY` as an encrypted Worker secret. The recipient
+is `joakim@ohlssonsmaleri.se`; set `CONTACT_FROM_EMAIL` to an address on the
+domain verified in Resend. A dedicated subdomain such as
+`forms.ohlssonsmaleri.se` keeps form-sending DNS separate from the existing
+Microsoft 365 mailbox records. Copy the exact DNS values from Resend before
+enabling delivery. The visitor's email is used only as `reply_to`; phone
+numbers remain in the message body.
+
+Live delivery still requires Resend domain verification, Worker configuration,
+deployment, and a test received in the destination mailbox.
+
+Run `npm test` to check delivery payloads, provider failures, validation, the
+honeypot, and the unconfigured fallback without sending real emails.
 
 ## SEO / sharing
 
